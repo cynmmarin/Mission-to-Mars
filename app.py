@@ -2,7 +2,7 @@
 # Import Tools
 from flask import Flask, render_template, redirect, url_for
 from flask_pymongo import PyMongo
-import scrapin
+import scraping
 
 # Set up Flask
 app = Flask(__name__)
@@ -29,5 +29,3 @@ def scrape():
 # Run Flask
 if __name__ == "__main__":
    app.run()
-
-
