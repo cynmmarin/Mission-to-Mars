@@ -49,8 +49,29 @@
             </div>
           </div>
         </div>
-      </body>
-    </html>
-
+        <div class="container-fluid">
+          <div class="row">
+            <h1 class="text-center">Hemispheres of Mars</h1>
+            <br>
+          {% for dict in mars.hemispheres %}
+              <div class="col-md-8 text-center">
+                <div class="card text-white bg-danger" style="width: 32rem;">
+                  <img 
+                    src="{{ dict.img_url | default('static/images/error.png', true) }}"
+                    class="img-responsive"
+                    alt="Hemisphere image">
+                    <div class="card-body text-center">
+                      <h4 class="card-deck text-center">{{ dict.title }}</h4>
+                    </div> 
+                  </div> 
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </body>
+  </html>
 
 

@@ -59,6 +59,10 @@ def mars_news(browser):
 def featured_image(browser):
     # Visit URL
     url = 'https://spaceimages-mars.com'
+
+    executable_path = {'executable_path': ChromeDriverManager().install()}
+    browser = Browser('chrome', **executable_path, headless=True)
+    
     browser.visit(url)
 
     # Find and click the full image button
@@ -98,6 +102,38 @@ def mars_facts():
     # Convert dataframe into HTML format, add bootstrap
     return df.to_html(classes="table table-striped")
 
+def hemispheres(browser):
+    # 1 Visit URL
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    # 2. Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+
+        # # Set up the HTML parse
+    html = browser.html
+    hemispheres_soup = soup(html, 'html.parser')
+
+    # 3. Write code to retrieve the image urls and titles for each hemisphere.
+    for item in range(0,4):
+        hemispheres = {}
+    
+        hem_title = hemispheres_soup.find_all('h3')[item]
+        titles = hem_title.get_text()
+        image = browser.find_by_tag("img.thumb")[item]
+        image.click()
+        href = browser.find_link_by_text("Sample").last
+        url = href['href']
+    
+        hemispheres = {'url':url, 'titles': titles}
+    
+        hemisphere_image_urls.append(hemispheres)
+        browser.back()
+
+    # 4. Print the list that holds the dictionary of each image url and title.
+    return hemisphere_image_urls
+
+    
 if __name__ == "__main__":
 
     # If running as script, print scraped data
